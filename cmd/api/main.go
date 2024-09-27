@@ -1,3 +1,5 @@
+//>#*D12`&I^';lyh^
+
 package main
 
 import (
@@ -10,7 +12,9 @@ import (
 )
 
 func main() {
-	repo := db.NewMemoryRepository()
+	//repo := db.NewMemoryRepository()
+	repo := db.NewPostgresRepository()
+
 	service := application.NewItemService(repo)
 
 	router := gin.Default()
