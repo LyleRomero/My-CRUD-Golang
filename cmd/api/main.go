@@ -6,14 +6,20 @@ import (
 	"My-CRUD-Golang/internal/adapters/db"
 	"My-CRUD-Golang/internal/application"
 	"My-CRUD-Golang/internal/domain"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+
+	dbConn, err := db.ConnectWithConnectorIAMAuthN()
+	if err != nil {
+		log.Fatalf("Unable to connect to database: %v", err)
+	}
 	//repo := db.NewMemoryRepository()
-	repo := db.NewPostgresRepository()
+	repo := db.NewPostgresRepository(dbConn)
 
 	service := application.NewItemService(repo)
 
